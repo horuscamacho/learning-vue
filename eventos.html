@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app"></div>
+<script>
+    const vm = Vue.createApp({
+        data(){
+            return{
+                evt: 'submit',
+                counter: 0
+            }
+        },
+        methods: {
+          submit() {
+              this.counter++;
+          },
+          add(){
+            this.counter++;
+            },
+          subtract(){
+            this.counter--;
+          }
+        },
+        template: `
+            <form v-on:[evt].prevent="submit">
+                <button>{{ counter }}</button>
+            </form>
+
+            <section>
+            <button v-on:click="subtract">-</button>{{ counter }}<button v-on:click="add">+</button>
+            </section>
+        `
+    }).mount('#app');
+    console.log(vm);
+</script>
+
+</body>
+</html>
