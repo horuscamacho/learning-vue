@@ -1,0 +1,159 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app"></div>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                text: 'Puerta cerrada',
+                open: false,
+                textButton: 'Abrir puerta',
+                styles: {
+                    backgroundColor: '#eca1a6'
+                },
+                username: '',
+                posts: [
+                    {
+                    title: 'Titulo 1',
+                    content: 'Lorem ipsum dolor sit amet'
+                    },
+                    {
+                        title: 'Titulo 2',
+                        content: 'Lorem ipsum dolor sit amet'
+                    },
+                    {
+                        title: 'Titulo 3',
+                        content: 'Lorem ipsum dolor sit amet'
+                    },
+                    {
+                        title: 'Titulo 4',
+                        content: 'Lorem ipsum dolor sit amet'
+                    },
+
+                ]
+            }
+        },
+        methods: {
+            toggle(){
+                if(this.open){
+                    this.username = ''
+                }
+                this.open = !this.open
+            }
+        },
+        computed: {
+            styled(){
+                /*return this.open ? {backgroundColor: '#b5e7a0'} : {backgroundColor: '#eca1a6'}*/
+                return this.open ? ['open'] : ['closed']
+            }
+        },
+        watch: {
+            open(value){
+                value === true ? this.text = 'Puerta abierta' : this.text = 'Puerta cerrada'
+                value === true ? this.textButton = 'Cerrar puerta' : this.textButton = 'Abrir puerta'
+            }
+        },
+        template: `
+<!--          <div class="container" :class="{'open': open, 'closed': !open}">-->
+          <div class="container" :class="styled">
+          <h2>{{text}}</h2>
+          <div v-if="open">
+            <p>Hola, {{username}} </p>
+            <div class="list">
+              <item v-for="(item, i) in posts"
+                    :key="i"
+                    :post="item"
+                    :index="i"
+              />
+            </div>
+          </div>
+          <div v-else>
+            <div>Usuario</div>
+            <input type="text" id="username" v-model="username">
+          </div>
+          <button v-on:click="toggle">
+            <div v-if="!open">Acceder</div>
+            <div v-if="open">Salir</div>
+          </button>
+          </div>
+
+        `
+    })
+
+
+    app.component('item', {
+        props: ['post', 'index'],
+        template: `
+              <div class="item">
+                <p1>{{ index + 1 }}</p1>
+                <div class="title">{{ post.title }}</div>
+                <p>{{ post.content }}</p>
+              </div>
+        `
+    })
+
+
+
+    const vm = app.mount('#app')
+</script>
+<style>
+    html, body {
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #app, .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+    button {
+        margin-top: 24px;
+        border: none;
+        background-color: white;
+        padding: 8px 24px;
+        border-radius: 12px;
+    }
+    .closed {
+        background-color: #eca1a6;
+    }
+    .open {
+        background-color: #b5e7a0;
+    }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+    }
+    .item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 12px;
+        padding: 12px;
+        margin: 12px;
+    }
+    .title {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+</style>
+
+</body>
+</html>
+<script setup>
+</script>
+<script setup>
+</script>

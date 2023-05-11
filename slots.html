@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        template: `
+            <div>
+            <v-layout>
+                <template v-slot:header>
+                    Título 1
+                </template>
+                <template v-slot:content>
+                    Contenido 1   sdlksmdklf
+                </template>
+            </v-layout>
+            </div>
+        `
+    });
+    app.component('v-layout', {
+        template: `
+        <header>
+             <slot name="header"></slot>
+        </header>
+        <div>
+             <slot name="content"></slot>
+        </div>
+
+        `
+    })
+    const vm = app.mount('#app');
+</script>
+</body>
+</html>
+<script setup>
+</script>
+<script setup>
+</script>
+<script setup>
+</script>
+<script setup>
+</script>
